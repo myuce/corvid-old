@@ -1,6 +1,16 @@
-const { getPlaneIntersection } = require("./Static");
+import Side from "./Side.js";
+import { getPlaneIntersection } from "./Static.js";
+
+/**
+ * 
+ */
 
 class Brush {
+	/**
+	 * 
+	 * @param {Side[]} sides
+	 * @param {string} entity
+	 */
 	constructor(sides, entity = "world") {
 		this.sides = sides;
 		this.hasDisplacement = false;
@@ -8,6 +18,9 @@ class Brush {
 		this.getIntersectionPoints();
 	}
 
+	/**
+	 * 
+	 */
 	getIntersectionPoints() {
 		for(let i = 0; i < this.sides.length - 2; i++) {
 			for(let j = i; j < this.sides.length - 1 ; j++) {
@@ -32,4 +45,4 @@ class Brush {
 
 }
 
-module.exports = Brush;
+export default Brush;

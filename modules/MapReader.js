@@ -1,7 +1,7 @@
-const VDF = require("vdf-parser");
-const Vector3 = require("./Vector3");
-const Side = require("./Side");
-const Brush = require("./Brush");
+import * as VDF from "vdf-parser";
+import Vector3 from "./Vector3.js";
+import Side from "./Side.js";
+import Brush from "./Brush.js";
 
 function readEntityBrush(entity) {
 	let solid = entity.solid;
@@ -16,7 +16,7 @@ function readEntityBrush(entity) {
 	return entity;
 }
 
-const readMap = (vmf) => {
+export default function readMap(vmf) {
 	const mapData = VDF.parse(vmf);
 
 	var worldBrushes = [];
@@ -60,5 +60,3 @@ const readMap = (vmf) => {
 		'entities': entities
 	};
 }
-
-module.exports = readMap;
