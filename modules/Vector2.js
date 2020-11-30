@@ -1,4 +1,4 @@
-const { deg2rad } = require("./Static");
+import { deg2rad } from "./Static.js";
 
 class Vector2 {
 	constructor(x, y) {
@@ -112,4 +112,4 @@ class Vector2 {
 	}
 }
 
-module.exports = Vector2;
+export default Vector2;

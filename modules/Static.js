@@ -35,9 +35,9 @@ const getPlaneIntersection = (side1, side2, side3) => {
 	).divide(determinant);
 }
 
-module.exports = {
-	"PI": 3.141592,
-	"deg2rad": deg2rad,
-	"rad2deg": rad2deg,
-	"getPlaneIntersection": getPlaneIntersection
+export {
+	PI,
+	deg2rad,
+	rad2deg,
+	getPlaneIntersection
 }

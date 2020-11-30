@@ -1,5 +1,5 @@
-const Vector3 = require("./Vector3");
-const Vector2 = require("./Vector2");
+import Vector3 from "./Vector3.js";
+import Vector2 from "./Vector2.js";
 
 const parseTriplets = (str) => {
 	let res = [];
@@ -140,4 +140,4 @@ class Side {
 	}
 }
 
-module.exports = Side;
+export default Side;

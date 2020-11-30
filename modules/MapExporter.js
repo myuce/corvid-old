@@ -1,8 +1,8 @@
-const { readFileSync, writeFileSync } = require("fs");
-const { basename } = require("path");
-const readMap = require("./MapReader");
-const Vector2 = require("./Vector2");
-const Vector3 = require("./Vector3");
+import { readFileSync, writeFileSync } from "fs";
+import { basename } from "path";
+import readMap from "./MapReader.js";
+import Vector2 from "./Vector2.js";
+import Vector3 from "./Vector3.js";
 
 function randomLightmap() {
 	const lightmaps = ["blue", "cyan", "gray", "green", "purple", "red", "yellow"];
@@ -331,8 +331,7 @@ function convertOverlay(entity) {
 	return ""
 }
 
-
-const exportMap = (vmfString) => {
+export default function exportMap(vmfString) {
 	const { worldBrushes, entities, entityBrushes} = readMap(vmfString);
 
 	let mapPatches = "";
@@ -422,5 +421,3 @@ const exportMap = (vmfString) => {
 
 	return result;
 }
-
-module.exports = exportMap;

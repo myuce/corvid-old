@@ -1,7 +1,7 @@
-const { readFileSync, writeFileSync } = require("fs");
-const Vector3 = require("./Vector3");
-const Vector2 = require("./Vector2");
-const readMap = require("./MapReader");
+import { readFileSync, writeFileSync } from "fs";
+import Vector3 from "./Vector3";
+import Vector2 from "./Vector2";
+import readMap from "./MapReader";
 
 const mapFile = readFileSync("./maps/test.vmf").toString();
 const { worldBrushes, entities, entityBrushes} = readMap(mapFile);

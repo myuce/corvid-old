@@ -206,4 +206,4 @@ class Vector3 {
 	}
 }
 
-module.exports = Vector3;
+export default Vector3;
