@@ -1,0 +1,23 @@
+{
+  "name": "corvid",
+  "description": "It's still a work on progress. Come back when it's finished.",
+  "version": "0.0.1",
+  "main": "test.js",
+  "dependencies": {
+    "vdf-parser": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KILLTUBE/corvid.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KILLTUBE/corvid/issues"
+  },
+  "homepage": "https://github.com/KILLTUBE/corvid#readme"
+}
