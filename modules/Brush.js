@@ -25,7 +25,7 @@ class Brush {
 		for(let i = 0; i < this.sides.length - 2; i++) {
 			for(let j = i; j < this.sides.length - 1 ; j++) {
 				for(let k = j; k < this.sides.length; k++) {
-					if(i != j != k) {
+					if(i != j && i != k && j != k) {
 						let intersectionPoint = getPlaneIntersection(this.sides[i], this.sides[j], this.sides[k]);
 						if(intersectionPoint != null && intersectionPoint.isLegal(this.sides)) {
 							this.sides[i].points.push(intersectionPoint);
