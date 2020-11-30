@@ -122,7 +122,7 @@ class Vector3 {
 	
 	equals(obj) {
 		if(obj instanceof Vector3) {
-			return this.subtract(obj).len().toFixed(2) <= 0.01;
+			return parseFloat(this.subtract(obj).len().toFixed(2)) <= 0.01; // numbers like 0.0100000 seem to cause problems in some rare cases
 		}
 		return false;
 	}
