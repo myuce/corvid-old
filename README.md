@@ -7,7 +7,7 @@ Convert levels from various Quake-based engines to other level and model formats
   - Brushes
   - Models
   - Displacements
-    - Alpha values
+  - Alpha values
   - Rope entities
   - Lights
 
