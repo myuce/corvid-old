@@ -6,9 +6,9 @@ import Brush from "./Brush.js";
 function readEntityBrush(entity) {
 	let solid = entity.solid;
 	entity.solid = [];
-	for(let brush of solid) {
+	for (let brush of solid) {
 		let solids = [];
-		for(let i = 0; i < brush.side.length; i++) {
+		for (let i = 0; i < brush.side.length; i++) {
 			solids.push(new Side(brush.side[i]));
 		}
 		entity.solid.push(new Brush(solids));
@@ -23,27 +23,29 @@ export default function readMap(vmf) {
 	var entityBrushes = [];
 	var entities = [];
 	// create an array of Side objects to iterate through them later
-	for(let solid of mapData.world.solid) {
+	// @ts-ignore
+	for (let solid of mapData.world.solid) {
 		let sides = [];
-		for(let side of solid.side) {
+		for (let side of solid.side) {
 			sides.push(new Side(side));
 		}
 		worldBrushes.push(new Brush(sides));
 	}
 
 
-	for(let entity of mapData.entity) {
-		if(typeof entity.solid == "object") {
-			if(typeof entity.solid.length == "undefined") { // entity has one brush
+	// @ts-ignore
+	for (let entity of mapData.entity) {
+		if (typeof entity.solid == "object") {
+			if (typeof entity.solid.length == "undefined") { // entity has one brush
 				let sides = [];
-				for(let side of entity.solid.side) {
+				for (let side of entity.solid.side) {
 					sides.push(new Side(side));
 				}
 				entityBrushes.push(new Brush(sides, entity.classname));
 			} else { // entity has multiple brushes
-				for(let solid of entity.solid) {
+				for (let solid of entity.solid) {
 					let sides = [];
-					for(let side of solid.side) {
+					for (let side of solid.side) {
 						sides.push(new Side(side));
 					}
 					entityBrushes.push(new Brush(sides, entity.classname))

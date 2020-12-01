@@ -1,25 +1,22 @@
+import Side from "./Side.js";
+
 class Vector3 {
+	/**
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} z
+	 */
 	constructor(x, y, z) {
-		if(typeof x == "string") {
-			let points = x.split(" ");
-			this.x = parseFloat(points[0]);
-			this.y = parseFloat(points[1]);
-			this.z = parseFloat(points[2]);
-		} else if(typeof x == "object") {
-			this.x = parseFloat(x[0]),
-			this.y = parseFloat(x[1]),
-			this.z = parseFloat(x[2]),
-			this.Extra = typeof x[3] != "undefined" ? parseFloat(x[3]) : ""
-		} else {
-			this.x = x === undefined ? 0 : x;
-			this.y = y === undefined ? 0 : y;
-			this.z = z === undefined ? 0 : z;
-		}
+		this.x = x === undefined ? 0 : x;
+		this.y = y === undefined ? 0 : y;
+		this.z = z === undefined ? 0 : z;
 	}
 
-	// arithmetics
+	/**
+	 * @param {Vector3 | number} v
+	 */
 	add(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector3(
 				this.x + v.x,
 				this.y + v.y,
@@ -33,9 +30,13 @@ class Vector3 {
 			);
 		}
 	}
-	
+
+
+	/**
+	 * @param {Vector3 | number} v
+	 */
 	subtract(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector3(
 				this.x - v.x,
 				this.y - v.y,
@@ -49,9 +50,12 @@ class Vector3 {
 			);
 		}
 	}
-	
+
+	/**
+	 * @param {Vector3 | number} v
+	 */
 	multiply(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector3(
 				this.x * v.x,
 				this.y * v.y,
@@ -65,9 +69,12 @@ class Vector3 {
 			);
 		}
 	}
-	
+
+	/**
+	 * @param {Vector3 | number} v
+	 */
 	divide(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector3(
 				this.x / v.x,
 				this.y / v.y,
@@ -81,7 +88,7 @@ class Vector3 {
 			);
 		}
 	}
-	
+
 	absolute() {
 		return new Vector3(
 			Math.abs(this.x),
@@ -89,23 +96,29 @@ class Vector3 {
 			Math.abs(this.z)
 		);
 	}
-	
+
+	/**
+	 * @param {Vector3} v
+	 */
 	dot(v) {
 		return (this.x * v.x) + (this.y * v.y) + (this.z * v.z);
 	}
-	
+
 	sqrLen() {
 		return this.dot(this);
 	}
-	
+
 	len() {
 		return Math.sqrt(this.sqrLen());
 	}
-	
+
 	normalize() {
 		return this.divide(this.len());
 	}
-	
+
+	/**
+	 * @param {Vector3} v
+	 */
 	cross(v) {
 		return new Vector3(
 			this.y * v.z - this.z * v.y,
@@ -113,20 +126,30 @@ class Vector3 {
 			this.x * v.y - this.y * v.x
 		);
 	}
-	
+
+	/**
+	 * @param {Vector3} v
+	 */
 	distance(v) {
 		return Math.sqrt(
 			Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2) + Math.pow(this.z - v.z, 2)
 		);
 	}
-	
+
+	/**
+	 * @param {Vector3 | object} obj
+	 */
 	equals(obj) {
-		if(obj instanceof Vector3) {
+		if (obj instanceof Vector3) {
 			return parseFloat(this.subtract(obj).len().toFixed(2)) <= 0.01; // numbers like 0.0100000 seem to cause problems in some rare cases
 		}
 		return false;
 	}
 
+	/**
+	 * @param {Vector3} v
+	 * @param {number} alpha
+	 */
 	lerp(v, alpha) {
 		return new Vector3(
 			this.x + (v.x - this.x) * alpha,
@@ -134,13 +157,16 @@ class Vector3 {
 			this.z + (v.z - this.z) * alpha,
 		);
 	}
-	
+
 	// some intersection points are out of the boundaries of the convex shape we aim to create using intersecting planes
 	// this method is used to detect and get rid of those illegal vertices
+	/**
+	 * @param {Side[]} sides
+	 */
 	isLegal(sides) {
-		for(let side of sides) {
+		for (let side of sides) {
 			let facing = this.subtract(side.center()).normalize();
-			if(facing.dot(side.normal().normalize()) < -0.01) {
+			if (facing.dot(side.normal().normalize()) < -0.01) {
 				return false;
 			}
 		}
@@ -151,6 +177,9 @@ class Vector3 {
 		return new Vector3(Math.round(this.x), Math.round(this.z), Math.round(this.z));
 	}
 
+	/**
+	 * @param {function} func
+	 */
 	exec(func) { // for callbacks and stuff if needed
 		return new Vector3(
 			func(this.x),
@@ -176,6 +205,9 @@ class Vector3 {
 		};
 	}
 
+	/**
+	 * @param {object} quat
+	 */
 	multiplyQuat(quat) {
 		let num = quat.x * 2;
 		let num2 = quat.y * 2;
@@ -197,6 +229,10 @@ class Vector3 {
 		);
 	}
 
+	/**
+	 * @param {Vector3} pivot
+	 * @param {Vector3} angles
+	 */
 	rotateAround(pivot, angles) {
 		return this.subtract(pivot).multiplyQuat(angles.toQuat()).add(pivot);
 	}

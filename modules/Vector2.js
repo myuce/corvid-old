@@ -1,8 +1,12 @@
 import { deg2rad } from "./Static.js";
 
 class Vector2 {
+	/**
+	 * @param {string | number} x
+	 * @param {number} y
+	 */
 	constructor(x, y) {
-		if(typeof x == "string") {
+		if (typeof x == "string") {
 			let points = x.split(" ");
 			this.x = parseFloat(points[0]);
 			this.y = parseFloat(points[1]);
@@ -12,8 +16,11 @@ class Vector2 {
 		}
 	}
 
+	/**
+	 * @param {Vector2 | number} v
+	 */
 	add(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector2(
 				this.x + v.x,
 				this.y + v.y,
@@ -25,9 +32,12 @@ class Vector2 {
 			);
 		}
 	}
-	
+
+	/**
+	 * @param {Vector2 | number} v
+	 */
 	subtract(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector2(
 				this.x - v.x,
 				this.y - v.y,
@@ -39,9 +49,12 @@ class Vector2 {
 			);
 		}
 	}
-	
+
+	/**
+	 * @param {Vector2 | number} v
+	 */
 	multiply(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector2(
 				this.x * v.x,
 				this.y * v.y,
@@ -53,9 +66,13 @@ class Vector2 {
 			);
 		}
 	}
-	
+
+
+	/**
+	 * @param {Vector2 | number} v
+	 */
 	divide(v) {
-		if(typeof v == "object") {
+		if (typeof v == "object") {
 			return new Vector2(
 				this.x / v.x,
 				this.y / v.y,
@@ -67,7 +84,7 @@ class Vector2 {
 			);
 		}
 	}
-	
+
 	absolute() {
 		return new Vector2(
 			Math.abs(this.x),
@@ -75,14 +92,10 @@ class Vector2 {
 		);
 	}
 
-	
-	equals(obj) {
-		if(obj instanceof Vector2) {
-			return this.subtract(obj).len() < 0.01;
-		}
-		return false;
-	}
-
+	/**
+	 * @param {Vector2} v
+	 * @param {number} alpha
+	 */
 	lerp(v, alpha) {
 		return new Vector2(
 			this.x + (v.x - this.x) * alpha,
@@ -90,6 +103,9 @@ class Vector2 {
 		);
 	}
 
+	/**
+	 * @param {number} angle
+	 */
 	rotate(angle) {
 		let c = Math.cos(deg2rad(angle));
 		let s = Math.sin(deg2rad(angle));
@@ -101,10 +117,6 @@ class Vector2 {
 
 	flip() {
 		return new Vector2(this.y, this.x);
-	}
-
-	toFixed(num) {
-		return new Vector2(this.x.toFixed(num), this.y.toFixed(num));
 	}
 
 	toStr() {
